@@ -5,6 +5,10 @@ set -e
 swift build \
  -Xswiftc -I$NJS/src \
  -Xswiftc -I$NJS/build \
+ -Xlinker -lpcre2-8 \
+ -Xlinker -lxml2 \
+ -Xlinker -lz \
+ -Xlinker -ledit \
  -Xlinker $NJS/build/libnjs.a
 
 export DYLD_LIBRARY_PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/lib/swift/macosx

@@ -9,8 +9,8 @@ struct Error: Swift.Error {
         self.source = source
     }
 
-    init(from source: String, in vm: OpaquePointer) {
-        self.message = String(retvalIn: vm)
+    init(in vm: OpaquePointer, source: String = "") throws {
+        self.message = try String(errorIn: vm)
         self.source = source
     }
 }

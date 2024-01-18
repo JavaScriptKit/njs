@@ -1,9 +1,11 @@
 import CNJS
 
 extension String {
-    init(retvalIn vm: OpaquePointer) {
+    init(errorIn vm: OpaquePointer) throws {
         var s = njs_str_t()
-        njs_vm_retval_string(vm, &s)
+        guard njs_vm_value_string(vm, &s, nil) == NJS_OK else {
+            throw Error(message: "njs_vm_value_string() failed")
+        }
         self = String(s)
     }
 }
