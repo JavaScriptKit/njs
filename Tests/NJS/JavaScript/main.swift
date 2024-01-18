@@ -1,12 +1,12 @@
 import Test
 @testable import NJS
 
-test.case("evaluate") {
+test("evaluate") {
     let context = try JSContext()
     _ = try context.evaluate("40 + 2")
 }
 
-test.case("ReferenceError exception") {
+test("ReferenceError exception") {
     let context = try JSContext()
 
     let message = """
@@ -20,7 +20,7 @@ test.case("ReferenceError exception") {
     }
 }
 
-test.case("SyntaxError exception") {
+test("SyntaxError exception") {
     let context = try JSContext()
 
     let message = "SyntaxError: Unexpected end of input in 1"
@@ -29,4 +29,4 @@ test.case("SyntaxError exception") {
     }
 }
 
-test.run()
+await run()

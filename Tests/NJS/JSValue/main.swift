@@ -1,7 +1,7 @@
 import Test
 @testable import NJS
 
-test.case("isUndefined") {
+test("isUndefined") {
     let context = try JSContext()
 
     let result = try context.evaluate("undefined")
@@ -13,7 +13,7 @@ test.case("isUndefined") {
     expect(try result.toString() == "undefined")
 }
 
-test.case("isNull") {
+test("isNull") {
     let context = try JSContext()
     let result = try context.evaluate("null")
     expect(result.isUndefined == false)
@@ -24,7 +24,7 @@ test.case("isNull") {
     expect(try result.toString() == "null")
 }
 
-test.case("isBool") {
+test("isBool") {
     let context = try JSContext()
     let result = try context.evaluate("true")
     expect(result.isUndefined == false)
@@ -36,7 +36,7 @@ test.case("isBool") {
     // expect(result.toBool(), true)
 }
 
-test.case("isNumber") {
+test("isNumber") {
     let context = try JSContext()
     let result = try context.evaluate("3.14")
     expect(result.isUndefined == false)
@@ -48,7 +48,7 @@ test.case("isNumber") {
     // expect(try result.toDouble(), 3.14)
 }
 
-test.case("isString") {
+test("isString") {
     let context = try JSContext()
     let result = try context.evaluate("'success'")
     expect(result.isUndefined == false)
@@ -59,19 +59,19 @@ test.case("isString") {
     expect(try result.toString() == "success")
 }
 
-test.case("toInt") {
+test("toInt") {
     let context = try JSContext()
     let result = try context.evaluate("40 + 2")
     expect(try result.toInt() == 42)
 }
 
-test.case("toString") {
+test("toString") {
     let context = try JSContext()
     let result = try context.evaluate("40 + 2")
     expect(try result.toString() == "42")
 }
 
-test.case("property") {
+test("property") {
     let context = try JSContext()
     let result = try context.evaluate("""
     (function(){
@@ -82,4 +82,4 @@ test.case("property") {
     expect(try result["property"]?.toString() == "test")
 }
 
-test.run()
+await run()
