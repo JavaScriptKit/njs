@@ -22,7 +22,10 @@ let package = Package(
             dependencies: []),
         .target(
             name: "NJS",
-            dependencies: ["CNJS", "JavaScript"])
+            dependencies: [
+                .target(name: "CNJS"),
+                .product(name: "JavaScript", package: "javascript"),
+            ])
     ]
 )
 
@@ -41,7 +44,10 @@ func addTest(target: String, name: String) {
     package.targets.append(
         .executableTarget(
             name: "Tests/\(target)/\(name)",
-            dependencies: ["Test", "NJS"],
+            dependencies: [
+                .target(name: "NJS"),
+                .product(name: "Test", package: "test"),
+            ],
             path: "Tests/\(target)/\(name)"))
 }
 
@@ -61,7 +67,7 @@ extension Package.Dependency {
 
         var baseUrl: String {
             switch self {
-            case .local: return "../"
+            case .local: return "../../swiftstack/"
             case .remote: return "https://swiftstack.io/"
             case .github: return "https://github.com/swiftstack/"
             }
@@ -87,6 +93,6 @@ extension Package.Dependency {
     static func package(name: String, source: Source) -> Package.Dependency {
         return source == .local
             ? .package(name: name, path: source.url(for: name))
-            : .package(name: name, url: source.url(for: name), .branch("dev"))
+            : .package(url: source.url(for: name), branch: "dev")
     }
 }
