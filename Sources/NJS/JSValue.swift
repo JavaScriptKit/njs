@@ -11,16 +11,14 @@ public class JSValue: JavaScript.JSValue {
     }
 
     public subscript(_ key: String) -> JSValue? {
-        get {
-            return key.withCString { keyPointer in
-                let start = UnsafeMutablePointer<UInt8>(keyPointer)
-                var s = njs_str_t(length: key.count, start: start)
-                var op = njs_opaque_value_t()
-                guard let p = njs_vm_object_prop(vm, pointer, &s, &op) else {
-                    return nil
-                }
-                return JSValue(p, in: vm)
+        key.withCString { keyPointer in
+            let start = UnsafeMutablePointer<UInt8>(keyPointer)
+            var s = njs_str_t(length: key.count, start: start)
+            var op = njs_opaque_value_t()
+            guard let p = njs_vm_object_prop(vm, pointer, &s, &op) else {
+                return nil
             }
+            return JSValue(p, in: vm)
         }
     }
 

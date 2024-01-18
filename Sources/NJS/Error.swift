@@ -22,7 +22,7 @@ extension Error: CustomStringConvertible {
 }
 
 extension Error: Equatable {
-    static func ==(lhs: Error, rhs: Error) -> Bool {
+    static func == (lhs: Error, rhs: Error) -> Bool {
         return lhs.message == rhs.message
     }
 }
