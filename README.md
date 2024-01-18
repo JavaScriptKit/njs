@@ -1,6 +1,6 @@
 # NJS
 
-[njs](https://nginx.org/en/docs/njs/) is a subset of the JavaScript language that allows extending nginx functionality. njs is created in compliance with ECMAScript 5.1 (strict mode) with some ECMAScript 6 and later extensions. The compliance is still evolving. 
+[njs](https://nginx.org/en/docs/njs/) is a subset of the JavaScript language that allows extending nginx functionality. njs is created in compliance with ECMAScript 5.1 (strict mode) with some ECMAScript 6 and later extensions. The compliance is still evolving.
 
 ## Usage
 
@@ -33,19 +33,5 @@ make -j8
 ```bash
 export NJS=/path/to/cloned/njs
 
-swift build \
- -Xswiftc -I$NJS/src \
- -Xswiftc -I$NJS/build \
- -Xlinker $NJS/build/libnjs.a
-
-swift test \
- -Xswiftc -I$NJS/src \
- -Xswiftc -I$NJS/build \
- -Xlinker $NJS/build/libnjs.a
-
-swift package \
- -Xswiftc -I$NJS/src \
- -Xswiftc -I$NJS/build \
- -Xlinker $NJS/build/libnjs.a \
- generate-xcodeproj
+./run_tests
 ```
